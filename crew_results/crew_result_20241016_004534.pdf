@@ -1,0 +1,3 @@
+The sentiment analysis for ONGC stock symbol is: {'sell': 4, 'hold': 6}
+
+This indicates that out of the 10 news posts analyzed, 4 have a negative sentiment (sell) and 6 have a neutral sentiment (hold).

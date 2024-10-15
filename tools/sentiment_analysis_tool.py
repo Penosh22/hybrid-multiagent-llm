@@ -51,7 +51,7 @@ def retail_sentiment_analysis(stock_symbol: str, limit: int = 10):
     Perform sentiment analysis on posts from TradingView Minds about a stock symbol.
     
     Args:
-        stock_symbol (str): The stock symbol to search for.
+        stock_symbol (str): The stock symbol to search for in tradingview ex: "HDFCBANK","LTIM","RELIANCE".
         limit (int): Number of posts to fetch from TradingView.
     
     Returns:

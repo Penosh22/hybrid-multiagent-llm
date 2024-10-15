@@ -10,7 +10,7 @@ def yf_tech_analysis(stock_symbol: str, period: str = "1y"):
     Perform a comprehensive technical analysis on the given stock symbol.
     
     Args:
-        stock_symbol (str): The stock symbol to analyze.
+        stock_symbol (str): The stock ticker symbol of yfinance to analyze with suffix ".NS" , example: "RELIANCE.NS".
         period (str): The time period for analysis. Default is "1y" (1 year).
     
     Returns:

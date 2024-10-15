@@ -10,7 +10,7 @@ def yf_fundamental_analysis(ticker: str):
     Perform a comprehensive fundamental analysis on the given stock symbol.
     
     Args:
-        ticker (str): The stock ticker symbol of yfinance to analyze.
+        ticker (str): The stock ticker symbol of yfinance to analyze with suffix ".NS" , example: "RELIANCE.NS".
     
     Returns:
         dict: A dictionary with the detailed fundamental analysis results.

@@ -10,7 +10,7 @@ def tradingview_news_tool(stock_symbol: str, max_articles: int = 5):
     Get the news articles from TradingView about a stock symbol.
 
     Args:
-        stock_symbol (str): The stock symbol to search for.
+        stock_symbol (str): The stock symbol to search for, in tradingview example: "HDFCBANK","LTIM","RELIANCE".
         max_articles (int): The maximum number of articles to fetch.
 
     Returns:
