@@ -19,10 +19,13 @@ import joblib
 import requests
 from bs4 import BeautifulSoup
 from langchain_groq import ChatGroq
+
+# Load environment variables
 load_dotenv()
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
+# Get TradingView news function
 def get_tradingview_news(stock_symbol: str, max_articles: int = 5):
     """Fetch news articles from TradingView."""
     tvnewsdata = []
@@ -34,11 +37,11 @@ def get_tradingview_news(stock_symbol: str, max_articles: int = 5):
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
         "sec-ch-ua-platform": '"Windows"'
     }
-    
+
     response = requests.get(url, headers=headers)
     data = response.json()
     story_paths = [item['storyPath'] for item in data['items']]
-    
+
     limit = 0
     for path in story_paths:
         iurl = "https://in.tradingview.com" + path
@@ -49,9 +52,10 @@ def get_tradingview_news(stock_symbol: str, max_articles: int = 5):
         limit += 1
         if limit == max_articles:
             break
-            
+
     return tvnewsdata
 
+# Market sentiment analysis tool using TradingView news
 @tool
 def market_sentiment_analysis(stock_symbol: str, limit: int = 5):
     """
@@ -72,25 +76,26 @@ def market_sentiment_analysis(stock_symbol: str, limit: int = 5):
     for post in tv_news:
         sentiment = pipeline.predict([str(post)])[0]
         sentiment = label_encoder.inverse_transform([sentiment])[0]
-        
+
         if sentiment not in sentiments_counts:
             sentiments_counts[sentiment] = 0
         sentiments_counts[sentiment] += 1
 
     return sentiments_counts
-# Model Selection
+
+# Initialize different LLM models based on user selection
 def initialize_llm(model_option, api_key):
     if model_option == 'gpt-3.5-turbo-1106':
         return ChatOpenAI(openai_api_key=api_key, model='gpt-3.5-turbo-1106', temperature=0.1)
     elif model_option == 'OpenAI GPT-4o Mini':
         return ChatOpenAI(openai_api_key=api_key, model='gpt-4o-mini', temperature=0.1)
     elif model_option == 'llama3-8b-8192':
-        return ChatGroq(groq_api_key=api_key , model='groq/llama3-8b-8192', temperature=0.1)  # Correct provider here
+        return ChatGroq(groq_api_key=api_key, model='groq/llama3-8b-8192', temperature=0.1)
     else:
         raise ValueError("Invalid model option selected")
 
 # FAISS index initialization
-embedding_dim = 768  
+embedding_dim = 768
 index_file = './faiss_index.index'
 
 # Check if FAISS index already exists, else create a new one
@@ -102,32 +107,36 @@ else:
 # Store for metadata (query-response pairs)
 query_response_metadata = []
 
+# Sentence Transformer model for embeddings
 model = SentenceTransformer('sentence-transformers/bert-base-nli-mean-tokens')
 
+# Function to get embeddings from text
 def get_embeddings(text):
     """Generate embeddings for the text using HuggingFace's model."""
     embedding = model.encode(text)
     return np.array(embedding)
 
+# Function to store query-response pairs in FAISS
 def store_query_response(query, response):
     """Store the query and response in the FAISS vector DB."""
     # Generate embeddings for the query
     query_embedding = get_embeddings(query)
-    
+
     # Add the embedding to the FAISS index
     index.add(np.array([query_embedding], dtype=np.float32))
-    
+
     # Save the query and response in metadata
     query_response_metadata.append({
         'query': query,
         'response': response
     })
-    
+
     # Persist the FAISS index and metadata
     faiss.write_index(index, index_file)
     with open('query_response_metadata.npy', 'wb') as f:
         np.save(f, query_response_metadata)
 
+# Function to load stored metadata
 def load_metadata():
     """Load stored metadata."""
     if os.path.exists('query_response_metadata.npy'):
@@ -135,34 +144,40 @@ def load_metadata():
             return np.load(f, allow_pickle=True).tolist()
     return []
 
+# Function to find a similar response from FAISS index
 def find_similar_response(query):
     """Find a similar response from the FAISS index."""
     query_embedding = get_embeddings(query)
-    distances, indices = index.search(np.array([query_embedding], dtype=np.float32), k=1)  # Search for the closest response
-    
-    if distances[0][0] < 1.0:  # A threshold for considering it a match (you can adjust this)
+    distances, indices = index.search(np.array([query_embedding], dtype=np.float32), k=1)
+
+    if distances[0][0] < 1.0:
         similar_query = query_response_metadata[indices[0][0]]['query']
         similar_response = query_response_metadata[indices[0][0]]['response']
         return similar_response, similar_query
     return None, None
 
-# Load metadata if it exists
+# Load stored metadata if it exists
 query_response_metadata = load_metadata()
-
-
 
 # Function to handle dynamic user queries and responses
 def handle_query(user_query, model_option, api_key):
-    # First check for a similar response
+    # Self-reflection and check for similar response
     stored_response, similar_query = find_similar_response(user_query)
-
     if stored_response is not None:
-        return f"Found a similar response for '{similar_query}': {stored_response}"
+        current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
+        os.makedirs('./crew_results', exist_ok=True)
+        file_path = f"./crew_results/crew_result_{current_time}.pdf"
+        result_str = str(stored_response)
+        with open(file_path, 'w', encoding='utf-8') as file:
+            file.write(result_str)
+        return f"{stored_response}"
+    
+    
 
-    # If no stored response, proceed with agent processing
+    # Initialize selected LLM
     llm = initialize_llm(model_option, api_key)
 
-    # Tools Initialization
+    # Initialize tools
     retail_sentiment_tool = retail_sentiment_analysis
     serper_tool = SerperDevTool()
     market_sentiment_tool = market_sentiment_analysis
@@ -170,7 +185,7 @@ def handle_query(user_query, model_option, api_key):
     yf_fundamental_tool = yf_fundamental_analysis
     news_tool = tradingview_news_tool
 
-    # Conversation Agent Definition
+    # Define Agents with Tree of Thought (ToT) evaluation for better reflection and exploration
     converser = Agent(
         role='Financial Data Analyst',
         goal='Dynamically respond to queries using available tools',
@@ -178,10 +193,10 @@ def handle_query(user_query, model_option, api_key):
         memory=True,
         backstory="An expert in financial analysis with deep understanding of various analytic tools, you're adept at providing dynamic and insightful information.",
         tools=[news_tool, yf_fundamental_tool, yf_tech_tool, retail_sentiment_tool, market_sentiment_tool, serper_tool],
-        llm=llm
+        llm=llm,
+        tree_of_thought=True  # Enabling Tree of Thought exploration
     )
-    
-    # Agents Definitions
+
     researcher = Agent(
         role='Senior Stock Market Researcher',
         goal='Gather and analyze comprehensive data about stock_symbol mentioned in {user_query}',
@@ -189,7 +204,8 @@ def handle_query(user_query, model_option, api_key):
         memory=True,
         backstory="With a Ph.D. in Financial Economics and 15 years of experience in equity research, you're known for your meticulous data collection and insightful analysis.",
         tools=[market_sentiment_tool, retail_sentiment_tool, serper_tool, news_tool],
-        llm=llm
+        llm=llm,
+        tree_of_thought=True  # Multiple hypotheses exploration
     )
 
     technical_analyst = Agent(
@@ -199,8 +215,10 @@ def handle_query(user_query, model_option, api_key):
         memory=True,
         backstory="As a Chartered Market Technician (CMT) with 15 years of experience, you have a keen eye for chart patterns and market trends.",
         tools=[yf_tech_tool],
-        llm=llm
+        llm=llm,
+        tree_of_thought=True  # Explore different technical indicators and scenarios
     )
+
     fundamental_analyst = Agent(
         role='Senior Fundamental Analyst',
         goal='Conduct a comprehensive fundamental analysis of stock_symbol mentioned in {user_query}',
@@ -208,8 +226,10 @@ def handle_query(user_query, model_option, api_key):
         memory=True,
         backstory="With a CFA charter and 15 years of experience in value investing, you dissect financial statements and identify key value drivers.",
         tools=[yf_fundamental_tool],
-        llm=llm
+        llm=llm,
+        tree_of_thought=True  # Explore different valuation methods and financial metrics
     )
+
     reporter = Agent(
         role='Chief Investment Strategist',
         goal='Synthesize all analyses to create a definitive investment report on stock_symbol mentioned in {user_query}',
@@ -217,10 +237,14 @@ def handle_query(user_query, model_option, api_key):
         memory=True,
         backstory="As a seasoned investment strategist with 20 years of experience, you weave complex financial data into compelling investment narratives.",
         tools=[market_sentiment_tool, retail_sentiment_tool, serper_tool, yf_fundamental_tool, yf_tech_tool, news_tool],
-        llm=llm
+        llm=llm,
+        tree_of_thought=True
     )
-    
-    # Task for dynamic interaction
+
+    # Dynamically determine which agents to use based on the query content
+
+
+        # Task for dynamic interaction
     dynamic_task = Task(
         description=(
             "Analyze and respond to the query: {user_query}. Include:\n"
@@ -238,9 +262,10 @@ def handle_query(user_query, model_option, api_key):
             "2. Key financial metrics (P/E, EPS growth, revenue growth, margins).\n"
             "3. Recent news and press releases (1 month).\n"
             "4. Analyst ratings and price targets (min 3 analysts).\n"
-            "5. sentiment analysis (100 posts).\n"
-            "6. Major institutional holders and recent changes.\n"
-            "7. Competitive landscape and market share.\n"
+            "5. market sentiment analysis.\n"
+            "6. retail sentiment analysis.\n"
+            "7. Major institutional holders and recent changes.\n"
+            "8. Competitive landscape and market share.\n"
             "Use reputable financial websites for data."
         ),
         expected_output='A detailed 150-word research report with data sources and brief analysis.',
@@ -293,16 +318,37 @@ def handle_query(user_query, model_option, api_key):
         expected_output='A 600-word investment report with clear sections, key insights.',
         agent=reporter
     )
-    
-    # Crew Definition and Kickoff for Dynamic Interaction
-    crew = Crew(
-        agents=[converser, researcher, technical_analyst, fundamental_analyst, reporter],
-        tasks=[dynamic_task, research_task, technical_analysis_task, fundamental_analysis_task, report_task],
-        process=Process.sequential,  # Using a sequential process for dynamic interaction
+        
+    selected_agents = []
+    selected_tasks = []
+    if 'technical analysis' in user_query.lower():
+        selected_agents.append(technical_analyst)
+        selected_tasks.append(technical_analysis_task)
+    if 'fundamental analysis' in user_query.lower():
+        selected_agents.append(fundamental_analyst)
+        selected_tasks.append(fundamental_analysis_task)
+    if 'market sentiment' in user_query.lower() or 'sentiment' in user_query.lower() or 'sentiment analysis' in user_query.lower():
+        selected_agents.append(researcher)
+        selected_tasks.append(research_task)
+    if 'detailed report' in user_query.lower() or 'detailed analysis' in user_query.lower() or 'detailed report' in user_query.lower() or 'investment report' in user_query.lower():
+        selected_agents.extend([researcher,technical_analyst,fundamental_analyst,reporter])
+        selected_tasks.extend([research_task,technical_analysis_task,fundamental_analysis_task,report_task])    
+    if not selected_agents:  # If no specific keyword is found, default to using all agents
+        selected_agents = [converser]
+        selected_tasks.append(dynamic_task)
+
+    # Create Crew for multi-agent collaboration with recursive feedback and ToT reasoning
+    market_analysis_crew = Crew(
+        title="Dynamic Stock Market Analysis Crew",
+        description="The crew handles stock market analysis using sentiment, technical, and fundamental data.", # Agents perform tasks sequentially with cross-agent evaluations
+        agents=selected_agents,
+        tasks=selected_tasks,
+        process=Process.sequential,
+        review_phase=True,  # Recursive review phase to evaluate and refine responses
         cache=True
     )
 
-    result = crew.kickoff(inputs={
+    result = market_analysis_crew.kickoff(inputs={
         'user_query': user_query
     })
     current_time = datetime.now().strftime("%Y%m%d_%H%M%S")

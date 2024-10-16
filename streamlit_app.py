@@ -38,7 +38,6 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # User inputs OpenAI API key and model option
-# User inputs OpenAI API key and model option
 llm_api_key = st.sidebar.text_input("LLM API Key", type="password")
 
 # Align model options with those expected in the initialize_llm function
