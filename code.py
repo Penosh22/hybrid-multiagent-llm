@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import faiss
 import openai
 from datetime import datetime
 from crewai import Agent, Task, Crew, Process
