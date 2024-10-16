@@ -58,7 +58,6 @@ durationpy
 embedchain
 emoji
 eval_type_backport
-faiss>=1.5.3
 faiss-cpu
 fastapi
 fastavro
