@@ -1,12 +1,14 @@
 import nltk
 from nltk.corpus import stopwords
 import spacy
+import en_core_web_sm
+
 
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
 
 try:
-    nlp = spacy.load("en_core_web_sm")
+    nlp = en_core_web_sm.load()
 except OSError:
     import os
     os.system("python -m spacy download en_core_web_sm")
