@@ -1,18 +1,3 @@
-channels:
-  - defaults
-  - conda-forge
-  - matsci
-  - abinit
-  - anaconda
-  - msys2
-  - conda-forge/label/cf202003
-  - conda-forge/label/cf202009
-  - conda-forge/label/cf202101
-  - conda-forge/label/cf202106
-  - conda-forge/label/cf202109
-  - conda-forge/label/cf202202
-  - conda-forge/label/cf202207
-  - conda-forge/label/cf202210
 dependencies:
   - asttokens=2.4.1
   - bzip2=1.0.8
