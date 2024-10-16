@@ -14,5 +14,5 @@ beautifulsoup4>=4.12.3,<5.0.0
 langchain==0.2.11
 python-dotenv==1.0.0
 streamlit==1.23.0
-
+pysqlite3-binary
 
