@@ -1,5 +1,4 @@
 import os
-import faiss
 import numpy as np
 import openai
 from datetime import datetime
