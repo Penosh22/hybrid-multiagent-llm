@@ -5,13 +5,7 @@ import os
 
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
-
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    os.system("python -m spacy download en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
-
+nlp = spacy.load("en_core_web_sm")
 
 def preprocess_text(text):
     doc = nlp(text)
