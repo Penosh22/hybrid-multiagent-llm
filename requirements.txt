@@ -1,15 +1,15 @@
+langchain-groq==0.0.1
 faiss-cpu==1.7.2
 numpy==1.23.5
-openai>=0.28.1,<0.29.0 
+openai>=1.12.0,<2.0.0  # Updated to satisfy crewai-tools
 datetime==4.5
 crewai==0.1.3
 crewai-tools==0.1.1
 sentence-transformers==2.2.2
 joblib==1.3.0
-requests>=2.31.0,<3.0.0  # Updated to match crewai-tools
-beautifulsoup4>=4.12.3,<5.0.0  # Updated to match crewai-tools
-langchain-openai==0.1.24
-langchain-groq==0.0.1
+requests>=2.31.0,<3.0.0
+beautifulsoup4>=4.12.3,<5.0.0
+langchain>=0.0.335,<0.0.336  # Kept as required by crewai
 python-dotenv==1.0.0
 streamlit==1.23.0
 
