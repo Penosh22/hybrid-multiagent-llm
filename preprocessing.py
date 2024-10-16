@@ -9,8 +9,8 @@ stop_words = set(stopwords.words('english'))
 try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
-    os.system("python -m spacy download en")
-    nlp = spacy.load("en")
+    os.system("python -m spacy download en_core_web_lg")
+    nlp = spacy.load("en_core_web_lg")
 
 
 def preprocess_text(text):
