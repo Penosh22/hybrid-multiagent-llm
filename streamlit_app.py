@@ -22,12 +22,44 @@ from bs4 import BeautifulSoup
 load_dotenv()
 
 from datetime import datetime
-
+# Custom CSS to control the height of the title and container
+st.markdown(
+    """
+    <style>
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+    }
+    h1 {
+        font-size: 3em;
+        line-height: 1.2em;
+        margin-top: 0;
+        padding-top: 0;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # Streamlit app title
 st.title("Financial Assistant Bot")
+# Custom CSS to increase the font size of the message
+st.markdown(
+    """
+    <style>
+    .custom-message {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #000; /* You can change the color if needed */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
+# Display the message with increased font size
+st.markdown('<p class="custom-message">I can help you with technical, fundamental, sentiment, and detailed analysis of Indian Stocks.</p>', unsafe_allow_html=True)
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -46,7 +78,15 @@ model_option = st.sidebar.selectbox("Model Option", [
     "OpenAI GPT-4o Mini",  # For GPT-4
     "llama3-8b-8192"  # For Llama model
 ])
-
+# Sidebar for sample questions
+st.sidebar.title("Sample Questions")
+st.sidebar.markdown("""
+- Can you provide a detailed investment report on HDFCBANK?
+- Give me technical analysis on LTIM
+- Give me fundamental analysis on Tata Motors
+- Give me sentiment analysis of TCS
+- Can you provide a detailed investment report on axisbank?
+""")
 # React to user input
 if prompt := st.chat_input("What is your query?"):
     # Display user message in chat message container

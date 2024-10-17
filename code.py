@@ -266,7 +266,8 @@ def handle_query(user_query, model_option, api_key):
             "6. retail sentiment analysis.\n"
             "7. Major institutional holders and recent changes.\n"
             "8. Competitive landscape and market share.\n"
-            "Use reputable financial websites for data."
+            "Use reputable financial websites for data.\n"
+            "diplay the output in clear sections"
         ),
         expected_output='A detailed 150-word research report with data sources and brief analysis.',
         agent=researcher
@@ -282,6 +283,7 @@ def handle_query(user_query, model_option, api_key):
             "6. Fibonacci retracement levels.\n"
             "7. Comparison with sector's average.\n"
             "Use the yf_tech_analysis tool for data."
+            "diplay the output in clear sections"
         ),
         expected_output='A 100-word technical analysis report with buy/sell/hold signals and annotated charts.',
         agent=technical_analyst
@@ -298,6 +300,7 @@ def handle_query(user_query, model_option, api_key):
             "7. Growth catalysts and risks (2-3 years).\n"
             "8. DCF valuation model with assumptions.\n"
             "Use yf_fundamental_analysis tool for data."
+            "diplay the output in clear sections"
         ),
         expected_output='A 100-word fundamental analysis report with buy/hold/sell recommendation and key metrics summary.',
         agent=fundamental_analyst
@@ -314,6 +317,7 @@ def handle_query(user_query, model_option, api_key):
             "7. Sentiment: Key takeaway from sentiment analysis, including the number of positive, negative and neutral comments and total comments.\n"
             "8. Investment Thesis: Bull and bear cases.\n"
             "9. Price Target: 12-month forecast.\n"
+            "diplay the output in clear sections"
         ),
         expected_output='A 600-word investment report with clear sections, key insights.',
         agent=reporter
@@ -355,7 +359,7 @@ def handle_query(user_query, model_option, api_key):
     os.makedirs('./crew_results', exist_ok=True)
     file_path = f"./crew_results/crew_result_{current_time}.pdf"
     result_str = str(result)
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w',encoding="utf-8") as file:
         file.write(result_str)
     
     # Store the result in FAISS
