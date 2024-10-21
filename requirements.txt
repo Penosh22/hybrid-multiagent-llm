@@ -5,3 +5,4 @@ crewai
 torch
 transformers
 yfinance
+nltk
