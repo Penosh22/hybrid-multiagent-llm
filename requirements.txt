@@ -4,3 +4,4 @@ openai
 crewai
 torch
 transformers
+yfinance
