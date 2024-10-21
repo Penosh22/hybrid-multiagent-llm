@@ -6,4 +6,5 @@ torch
 transformers
 yfinance
 nltk
+chromadb
 pysqlite3-binary
