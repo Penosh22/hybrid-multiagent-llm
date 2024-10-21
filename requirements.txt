@@ -6,6 +6,6 @@ torch
 transformers
 yfinance
 nltk
-chromadb
+chromadb==0.5.15
 sqlite3>=3.35.0
-pysqlite3-binary
+
