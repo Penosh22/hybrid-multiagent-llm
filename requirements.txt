@@ -6,4 +6,4 @@ torch
 transformers
 yfinance
 nltk
-pysqlite3-binary
+sqlite3 >= 3.35.0.
