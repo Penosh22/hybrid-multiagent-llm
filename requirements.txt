@@ -1,2 +1,2 @@
 faiss-cpu
-faiss
+faiss<=1.5.3
