@@ -1,10 +1,10 @@
 beautifulsoup4==4.12.3
 crewai==0.74.2
-# consider removing crewai_tools or finding a compatible version
+# Remove crewai_tools if it's not essential or find a compatible version
 faiss_cpu==1.9.0
 joblib==1.4.2
 langchain==0.3.4
-# Adjust langchain versions or remove if possible
+# Adjust langchain dependencies
 nltk==3.9.1
 numpy==1.25.0
 openai==1.52.0
@@ -13,11 +13,10 @@ plotly==5.24.1
 python-dotenv==1.0.1
 Requests==2.32.3
 sentence_transformers==3.2.0
-# Change spacy to a compatible version
-spacy==3.4.0  # Try downgrading to a compatible version
+spacy==3.4.0  # Ensure compatibility
 streamlit==1.39.0
 torch==2.4.1
 transformers==4.45.2
 yfinance==0.2.44
-# Adjust pydantic to meet the requirements
-pydantic==2.6.1  # Change to a version that fits the range
+# Upgrade pydantic to meet langchain requirements
+pydantic>=2.7.4  # Use a version that fits the range, remove strict versioning
