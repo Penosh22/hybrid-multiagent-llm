@@ -3,7 +3,7 @@ streamlit==1.36.0
 openai>=1.13.3
 crewai>=0.67.0
 crewai-tools>=0.13.2
-langchain==0.3.0
+langchain==0.2.16
 torch
 transformers
 yfinance
