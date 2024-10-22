@@ -7,3 +7,4 @@ transformers
 yfinance
 nltk
 pysqlite3-binary
+sqlite3>=3
