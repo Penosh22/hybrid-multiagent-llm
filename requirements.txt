@@ -1,9 +1,9 @@
 faiss-cpu==1.9.0
 streamlit==1.36.0
 openai>=1.13.3
-crewai>=0.41.1
-crewai-tools==0.13.2
-langchain
+crewai>=0.67.0
+crewai-tools>=0.13.2
+langchain==0.3.0
 torch
 transformers
 yfinance
