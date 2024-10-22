@@ -1,19 +1,19 @@
 beautifulsoup4==4.12.3
 crewai==0.74.2
-faiss_cpu==1.9.0
+faiss-cpu>=1.9.0
 joblib==1.4.2
 langchain==0.3.4
 nltk==3.9.1
-numpy==1.25.0  # Ensure compatibility with faiss
+numpy>=1.25.0  # Ensure compatibility with faiss
 openai==1.52.0
 pandas==2.2.3
 plotly==5.24.1
 python-dotenv==1.0.1
 requests==2.32.3
 sentence_transformers==3.2.0
-spacy==3.4.0  # Retaining this version to maintain compatibility
+spacy==3.4.0  # Ensure compatibility with pydantic
 streamlit==1.39.0
 torch==2.4.1
 transformers==4.45.2
-pydantic>=2.7.4,<3.0.0  # Ensure compatibility across libraries
-pathy==0.3.5  # Locking this to a specific version
+pydantic>=2.7.4,<3.0.0
+pathy==0.3.5
