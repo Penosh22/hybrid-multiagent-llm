@@ -1,11 +1,9 @@
 faiss-cpu==1.9.0
-streamlit
+streamlit==1.36.0
 openai
 crewai
 torch
 transformers
 yfinance
 nltk
-streamlit==1.36.0
 pysqlite3-binary
-
