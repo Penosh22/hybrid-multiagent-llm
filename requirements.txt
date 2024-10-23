@@ -1,19 +1,21 @@
 beautifulsoup4==4.12.3
-crewai==0.74.2
-faiss-cpu>=1.9.0
+crewai==0.75.1
+crewai_tools==0.13.2
 joblib==1.4.2
 langchain==0.3.4
+langchain_community==0.3.3
+langchain_groq==0.2.0
+langchain_openai==0.2.3
 nltk==3.9.1
-numpy>=1.25.0  # Ensure compatibility with faiss
-openai==1.52.0
+numpy==2.1.2
+openai==1.52.1
 pandas==2.2.3
 plotly==5.24.1
 python-dotenv==1.0.1
-requests==2.32.3
+Requests==2.32.3
 sentence_transformers==3.2.0
-spacy==3.4.0  # Ensure compatibility with pydantic
+spacy==3.8.2
 streamlit==1.39.0
 torch==2.4.1
 transformers==4.45.2
-pydantic>=2.7.4,<3.0.0
-pathy==0.3.5
+yfinance==0.2.44
