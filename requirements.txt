@@ -6,3 +6,4 @@ transformers==4.46.0
 crewai-tools==0.4.8
 yfinance
 nltk==3.9.1
+spacy==3.7.5
