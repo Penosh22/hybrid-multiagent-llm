@@ -1,6 +1,6 @@
 import os
 import numpy as np
-import faiss
+#import faiss
 import openai
 from datetime import datetime
 from crewai import Agent, Task, Crew, Process
@@ -162,6 +162,7 @@ query_response_metadata = load_metadata()
 # Function to handle dynamic user queries and responses
 def handle_query(user_query, model_option, api_key):
     # Self-reflection and check for similar response
+    '''
     stored_response, similar_query = find_similar_response(user_query)
     if stored_response is not None:
         current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -171,6 +172,10 @@ def handle_query(user_query, model_option, api_key):
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(result_str)
         return f"{stored_response}"
+<<<<<<< HEAD
+=======
+    '''
+>>>>>>> 6ccf4ca21ce7e89a533c3c89e88093d15f4654bc
     
 
     # Initialize selected LLM
@@ -365,5 +370,5 @@ def handle_query(user_query, model_option, api_key):
     final_response = result
     
     # Store the query and response in FAISS
-    store_query_response(user_query, final_response)
+    #store_query_response(user_query, final_response)
     return final_response
