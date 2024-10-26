@@ -207,7 +207,7 @@ pyreadline3==3.5.4 ; sys_platform == "win32" and python_version >= "3.10" and py
 pyright==1.1.386 ; python_version >= "3.10" and python_full_version <= "3.13.0"
 pysbd==0.3.4 ; python_version >= "3.10" and python_full_version <= "3.13.0"
 pysocks==1.7.1 ; python_version >= "3.10" and python_full_version <= "3.13.0"
-pysqlite3-binary @ https://github.com/Penosh22/hybrid-multiagent-llm/blob/9f9f026c0996194bdb9c5938ef8feb1e2b222912/pysqlite3_binary-0.5.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+pysqlite3-binary @ pysqlite3-binary @ https://raw.githubusercontent.com/Penosh22/hybrid-multiagent-llm/9f9f026c0996194bdb9c5938ef8feb1e2b222912/pysqlite3_binary-0.5.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
 pytest==8.3.3 ; python_version >= "3.10" and python_full_version <= "3.13.0"
 python-dateutil==2.9.0.post0 ; python_version >= "3.10" and python_full_version <= "3.13.0"
 python-dotenv==1.0.1 ; python_version >= "3.10" and python_full_version <= "3.13.0"
