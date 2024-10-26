@@ -29,7 +29,7 @@ joblib = "^1.4.2"
 crewai-tools = "^0.13.2"
 beautifulsoup4 = "^4.12.3"
 langchain-groq = "0.2.0"
-pysqlite3-binary = {path = "E:/Data Science/Capstone/Mindyourstock/pysqlite3_binary-0.5.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"}
+pysqlite3-binary = {path = "pysqlite3_binary-0.5.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"}
 
 
 
