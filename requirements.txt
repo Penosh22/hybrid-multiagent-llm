@@ -5,3 +5,4 @@ torch==2.5.0
 transformers==4.46.0
 crewai-tools==0.4.8
 yfinance
+nltk==3.9.1
