@@ -289,3 +289,4 @@ wsproto==1.2.0 ; python_version >= "3.10" and python_full_version <= "3.13.0"
 yarl==1.16.0 ; python_version >= "3.10" and python_full_version <= "3.13.0"
 yfinance==0.2.46 ; python_version >= "3.10" and python_full_version <= "3.13.0"
 zipp==3.20.2 ; python_version >= "3.10" and python_full_version <= "3.13.0"
+pysqlite3-binary
