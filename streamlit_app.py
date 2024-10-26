@@ -82,9 +82,9 @@ model_option = st.sidebar.selectbox("Model Option", [
 st.sidebar.title("Sample Questions")
 st.sidebar.markdown("""
 - Can you provide a detailed investment report on HDFCBANK?
-- Give me technical analysis on LTIM
-- Give me fundamental analysis on Tata Motors
-- Give me sentiment analysis of TCS
+- Give me technical analysis on ONGC
+- give me fundamental analysis on bharat petroleum
+- give me sentiment analysis of sun pharma
 - Can you provide a detailed investment report on axisbank?
 """)
 # React to user input

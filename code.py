@@ -172,7 +172,6 @@ def handle_query(user_query, model_option, api_key):
             file.write(result_str)
         return f"{stored_response}"
     
-    
 
     # Initialize selected LLM
     llm = initialize_llm(model_option, api_key)
@@ -283,9 +282,9 @@ def handle_query(user_query, model_option, api_key):
             "6. Fibonacci retracement levels.\n"
             "7. Comparison with sector's average.\n"
             "Use the yf_tech_analysis tool for data."
-            "diplay the output in clear sections"
+            "diplay the output in clear sections with clear bullet points"
         ),
-        expected_output='A 100-word technical analysis report with buy/sell/hold signals and annotated charts.',
+        expected_output='A 100-word technical analysis report with buy/sell/hold signals',
         agent=technical_analyst
     )
     fundamental_analysis_task = Task(
@@ -300,7 +299,7 @@ def handle_query(user_query, model_option, api_key):
             "7. Growth catalysts and risks (2-3 years).\n"
             "8. DCF valuation model with assumptions.\n"
             "Use yf_fundamental_analysis tool for data."
-            "diplay the output in clear sections"
+            "diplay the output in clear sections with clear bullet points"
         ),
         expected_output='A 100-word fundamental analysis report with buy/hold/sell recommendation and key metrics summary.',
         agent=fundamental_analyst
