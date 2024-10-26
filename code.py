@@ -172,12 +172,7 @@ def handle_query(user_query, model_option, api_key):
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(result_str)
         return f"{stored_response}"
-<<<<<<< HEAD
-=======
-    '''
->>>>>>> 6ccf4ca21ce7e89a533c3c89e88093d15f4654bc
-    
-
+    '''    
     # Initialize selected LLM
     llm = initialize_llm(model_option, api_key)
 
