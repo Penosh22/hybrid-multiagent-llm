@@ -9,3 +9,4 @@ nltk==3.9.1
 spacy==3.7.5
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.0/en_core_web_sm-3.7.0-py3-none-any.whl
 sentence-transformers==3.2.1
+langchain-groq==0.2.0
