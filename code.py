@@ -157,7 +157,7 @@ def find_similar_response(query):
     return None, None
 
 # Load stored metadata if it exists
-query_response_metadata = load_metadata()
+# query_response_metadata = load_metadata()
 
 # Function to handle dynamic user queries and responses
 def handle_query(user_query, model_option, api_key):
