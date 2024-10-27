@@ -49,8 +49,9 @@ Here’s a peek into the inner workings:
 
 1. **Clone This Repo**:
    ```bash
-   git clone https://github.com/YourUsername/Hybrid-Multi-Agent-RAG-Model.git
-   cd Hybrid-Multi-Agent-RAG-Model
+  git clone https://github.com/Penosh22/hybrid-multiagent-llm.git
+  cd hybrid-multiagent-llm
+
    ```
 
 2. **Install Dependencies with Poetry**:
