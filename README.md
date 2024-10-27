@@ -49,8 +49,8 @@ Here’s a peek into the inner workings:
 
 1. **Clone This Repo**:
    ```bash
-  git clone https://github.com/Penosh22/hybrid-multiagent-llm.git
-  cd hybrid-multiagent-llm
+   git clone https://github.com/Penosh22/hybrid-multiagent-llm.git
+   cd hybrid-multiagent-llm
 
    ```
 
