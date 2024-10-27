@@ -14,14 +14,19 @@ torch = "2.3.1"
 transformers = "4.42.4"
 yfinance = "0.2.41"
 pandas = "2.2.2"
-numpy = "1.26.4"
+numpy = ">=1,<2"
 streamlit = "1.36.0"
 crewai-tools = "0.4.8"
 langchain-community = "0.2.10"
 langchain-groq = "0.1.6"
 langchain-openai = "0.1.16"
 sentence-transformers = "^3.2.1"
-
+spacy = "^3.4.0"
+nltk = "^3.9.1"
+python-dotenv = "^1.0.1"
+openai = "^1.52.2"
+joblib = "^1.4.2"
+beautifulsoup4 = "^4.12.3"
 
 
 [build-system]
