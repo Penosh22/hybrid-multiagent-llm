@@ -93,7 +93,7 @@ def initialize_llm(model_option, api_key):
         return ChatGroq(groq_api_key=api_key, model='groq/llama3-8b-8192', temperature=0.1)    
     else:
         raise ValueError("Invalid model option selected")
-
+'''
 # FAISS index initialization
 embedding_dim = 768
 index_file = './faiss_index.index'
@@ -103,7 +103,7 @@ if os.path.exists(index_file):
     index = faiss.read_index(index_file)
 else:
     index = faiss.IndexFlatL2(embedding_dim)
-
+'''
 # Store for metadata (query-response pairs)
 query_response_metadata = []
 
