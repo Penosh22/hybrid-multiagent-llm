@@ -90,7 +90,7 @@ def initialize_llm(model_option, api_key):
     elif model_option == 'OpenAI GPT-4o Mini':
         return ChatOpenAI(openai_api_key=api_key, model='gpt-4o-mini', temperature=0.1)
     elif model_option == 'llama3-8b-8192':
-        return ChatGroq(groq_api_key=api_key, model='groq/llama3-8b-8192', temperature=0.1)    
+        return ChatGroq(groq_api_key=api_key, model='llama3-8b-8192', temperature=0.1)    
     else:
         raise ValueError("Invalid model option selected")
 '''
