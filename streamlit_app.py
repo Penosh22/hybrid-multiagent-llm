@@ -43,7 +43,7 @@ st.markdown(
 
 
 # Streamlit app title
-st.title("Financial Assistant Bot")
+st.title("Mind Yuor Stock")
 # Custom CSS to increase the font size of the message
 st.markdown(
     """
