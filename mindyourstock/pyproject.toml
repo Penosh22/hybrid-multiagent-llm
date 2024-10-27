@@ -28,6 +28,9 @@ openai = "^1.52.2"
 joblib = "^1.4.2"
 beautifulsoup4 = "^4.12.3"
 
+[tool.poetry.scripts]
+download-spacy-model = "spacy.cli:download"
+
 
 [build-system]
 requires = ["poetry-core"]
