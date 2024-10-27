@@ -10,7 +10,7 @@ from tools.fundamental_analysis_tool import yf_fundamental_analysis
 from langchain_openai import ChatOpenAI
 from tools.search_tools import SearchTools  # Import the SearchTools class
 from tools.news_tool import tradingview_news_tool  # Import the yahoo_news_tool
-import faiss
+#import faiss
 import numpy as np
 import openai
 from crewai_tools import tool
@@ -43,7 +43,7 @@ st.markdown(
 
 
 # Streamlit app title
-st.title("Financial Assistant Bot")
+st.title("Mind Yuor Stock")
 # Custom CSS to increase the font size of the message
 st.markdown(
     """
